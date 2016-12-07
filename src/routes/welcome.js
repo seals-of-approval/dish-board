@@ -26,7 +26,7 @@ const welcome = {
       if (err) throw err;
       const myToken = JSON.parse(body).access_token;
       console.log(`By the way, we've got the token: ${myToken}`);
-      reply('worked!');
+      reply.view('profile', {hello: 'hello world'});
     });
     // reply.view('profile')
   }
