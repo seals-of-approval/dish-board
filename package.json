@@ -26,6 +26,7 @@
     "nodemon": "^1.11.0"
   },
   "dependencies": {
+    "env2": "^2.1.1",
     "hapi": "^16.0.1",
     "hapi-auth-cookie": "^6.1.1",
     "inert": "^4.0.3"
