@@ -15,7 +15,10 @@ const defaultRoute = {
   }
 };
 
-server.connection({ port: process.env.PORT || 4000 });
+server.connection({
+  host: 'localhost',
+  port: process.env.PORT || 8080
+});
 
 server.register([Inert, CookieAuth], (registerError) => {
   if (registerError) throw registerError;
