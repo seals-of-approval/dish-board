@@ -2,6 +2,10 @@
 
 A website for FAC members to see all the issues from the FAC organisation on github.
 
+## Design Mockup
+
+![Design Mockup](docs/mockup-dishboard.jpg)
+
 ## User stories
 
 **As a** FAC student,
