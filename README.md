@@ -1,4 +1,8 @@
-# User stories
+# Seal of approval
+
+A website for FAC members to see all the issues from the FAC organisation on github.
+
+## User stories
 
 **As a** FAC student,
 **I want to** see the status of all my issues from the FAC organisation in one place
