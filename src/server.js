@@ -7,16 +7,15 @@ const env = require('env2');
 
 env('./config.env');
 
-const server = new Hapi.Server();
-
-// const token = '191f179355b4e4f1514a66d747986e932985c735';
+const accessToken = '191f179355b4e4f1514a66d747986e932985c735';
 const secret = process.env.CLIENT_SECRET;
 
 const payload = {
   'typ': 'JWT',
   'sub': 'user-info',
   'exp': Date.now() + 24 * 60 * 60 * 1000,
-  'iat': Date.now()
+  'iat': Date.now(),
+  'accessToken': accessToken
 };
 
 const algorithm = 'HS256';
@@ -39,11 +38,20 @@ const defaultRoute = {
   }
 };
 
-server.connection({ port: process.env.PORT || 4000 });
+const cookieOptions = {
+  password: process.env.COOKIE_PASSWORD,
+  cookie: 'JWT-cookie',
+  isSecure: process.env.NODE_ENV === 'PRODUCTION',
+  ttl: 24 * 60 * 60 * 1000
+};
+
+const server = new Hapi.Server();
+
+server.connection({ port: process.env.PORT || 8080 });
 
 server.register([Inert, CookieAuth], (registerError) => {
   if (registerError) throw registerError;
-
+  server.auth.strategy('session', 'cookie', cookieOptions);
   server.route([defaultRoute, ...routes]);
 });
 
