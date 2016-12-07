@@ -1,5 +1,4 @@
 const querystring = require('querystring');
-const env = require('env2')('./config.env');
 
 const githubOauth = {
   client_id: process.env.CLIENT_ID,

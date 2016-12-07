@@ -1,5 +1,4 @@
 const request = require('request');
-const env = require('env2')('./config.env');
 
 const setOptions = (code) => {
   const options = {
