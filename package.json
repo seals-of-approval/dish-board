@@ -23,12 +23,15 @@
     "eslint-config-semistandard": "^7.0.0",
     "eslint-config-standard": "^6.2.1",
     "eslint-plugin-promise": "^3.4.0",
-    "eslint-plugin-standard": "^2.0.1"
+    "eslint-plugin-standard": "^2.0.1",
+    "nodemon": "^1.11.0"
   },
   "dependencies": {
+    "env2": "^2.1.1",
     "hapi": "^16.0.1",
     "hapi-auth-cookie": "^6.1.1",
     "inert": "^4.0.3",
-    "json-web-token": "^2.0.3"
+    "json-web-token": "^2.0.3",
+    "request": "^2.79.0"
   }
 }

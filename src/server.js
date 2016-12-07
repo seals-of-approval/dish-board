@@ -1,11 +1,9 @@
 const Hapi = require('hapi');
+const env = require('env2')('./config.env');
 const routes = require('./routes.js');
 const Inert = require('inert');
 const CookieAuth = require('hapi-auth-cookie');
 const jwt = require('json-web-token');
-const env = require('env2');
-
-env('./config.env');
 
 const accessToken = '191f179355b4e4f1514a66d747986e932985c735';
 const secret = process.env.CLIENT_SECRET;
@@ -47,7 +45,10 @@ const cookieOptions = {
 
 const server = new Hapi.Server();
 
-server.connection({ port: process.env.PORT || 8080 });
+server.connection({
+  host: 'localhost',
+  port: process.env.PORT || 8080
+});
 
 server.register([Inert, CookieAuth], (registerError) => {
   if (registerError) throw registerError;
