@@ -1,0 +1,26 @@
+{
+  "name": "dish-board",
+  "version": "1.0.0",
+  "description": "A Dashboard of Issues i.e. DISHBOARD",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seals-of-approval/dish-board.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seals-of-approval/dish-board/issues"
+  },
+  "homepage": "https://github.com/seals-of-approval/dish-board#readme",
+  "devDependencies": {
+    "eslint": "^3.11.1",
+    "eslint-config-semistandard": "^7.0.0",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-standard": "^2.0.1"
+  }
+}
