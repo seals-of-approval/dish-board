@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/seals-of-approval/dish-board#readme",
   "devDependencies": {
+    "env2": "^2.1.1",
     "eslint": "^3.11.1",
     "eslint-config-semistandard": "^7.0.0",
     "eslint-config-standard": "^6.2.1",
@@ -27,6 +28,7 @@
   "dependencies": {
     "hapi": "^16.0.1",
     "hapi-auth-cookie": "^6.1.1",
-    "inert": "^4.0.3"
+    "inert": "^4.0.3",
+    "json-web-token": "^2.0.3"
   }
 }
