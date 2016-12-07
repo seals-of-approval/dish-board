@@ -1,4 +1,5 @@
 const request = require('request');
+const createJwt = require('../create-jwt');
 
 const setOptions = (code) => {
   const options = {
@@ -25,6 +26,7 @@ const welcome = {
     request(myOptions, (err, res, body) => {
       if (err) throw err;
       const myToken = JSON.parse(body).access_token;
+      createJwt(myToken);
       console.log(`By the way, we've got the token: ${myToken}`);
       reply('worked!');
     });
