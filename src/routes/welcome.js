@@ -1,4 +1,5 @@
 const request = require('request');
+const createJwt = require('../create-jwt');
 
 const setOptions = (code) => {
   const options = {
@@ -25,10 +26,17 @@ const welcome = {
     request(myOptions, (err, res, body) => {
       if (err) throw err;
       const myToken = JSON.parse(body).access_token;
-      console.log(`By the way, we've got the token: ${myToken}`);
-      reply.view('profile', {hello: 'hello world'});
+      createJwt.updatePayload(myToken);
+      createJwt.encodeJWT(function (err, token) {
+        if (err) {
+          return console.error(err.name, err.message);
+        } else {
+          req.cookieAuth.set({auth: token});
+          reply('hello');
+          // reply.redirect('/profile');
+        }
+      });
     });
-    // reply.view('profile')
   }
 };
 
