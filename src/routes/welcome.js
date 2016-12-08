@@ -1,6 +1,5 @@
 const request = require('request');
 const createJwt = require('../create-jwt');
-let jwtoken;
 
 const setOptions = (code) => {
   const options = {
@@ -22,24 +21,28 @@ const setOptions = (code) => {
 const welcome = {
   method: 'GET',
   path: '/welcome',
-  handler: (req, reply) => {
-    const myOptions = setOptions(req.query.code);
-    request(myOptions, (err, res, body) => {
-      if (err) throw err;
-      const myToken = JSON.parse(body).access_token;
-      createJwt.setPayload(myToken);
-      createJwt.encodeJWT(function (err, token) {
-        if (err) {
-          return console.error(err.name, err.message);
-        } else {
-          jwtoken = token;
-          console.log(jwtoken);
-        }
+  config: {
+    auth: false,
+    handler: (req, reply) => {
+      const myOptions = setOptions(req.query.code);
+      request(myOptions, (err, res, body) => {
+        if (err) throw err;
+        const myToken = JSON.parse(body).access_token;
+        createJwt.updatePayload(myToken);
+        createJwt.encodeJWT(function (err, token) {
+          if (err) {
+            return console.error(err.name, err.message);
+          } else {
+            console.log(req.auth.credentials);
+            req.CookieAuth.set({auth: token});
+            console.log(token);
+            reply('worked!');
+          }
+        });
+        // console.log(`By the way, we've got the token: ${myToken}`);
       });
-      // console.log(`By the way, we've got the token: ${myToken}`);
-      reply('worked!');
-    });
-    // reply.view('profile')
+      // reply.view('profile')
+    }
   }
 };
 
