@@ -5,7 +5,6 @@ const Inert = require('inert');
 const CookieAuth = require('hapi-auth-cookie');
 const jwt = require('json-web-token');
 
-const accessToken = '191f179355b4e4f1514a66d747986e932985c735';
 const secret = process.env.CLIENT_SECRET;
 
 const payload = {
