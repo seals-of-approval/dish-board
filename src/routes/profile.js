@@ -4,7 +4,7 @@ const jsonToProfileObject = require('../helpers/json-to-profile-object');
 
 const getIssues = (accessToken, cb) => {
   request.get({
-    url: 'https://api.github.com/orgs/fac9/issues?filter=all',
+    url: 'https://api.github.com/orgs/fac9/issues?filter=all&state=all',
     headers: {
       'User-Agent': 'dish-board',
       Authorization: `token ${accessToken}`
