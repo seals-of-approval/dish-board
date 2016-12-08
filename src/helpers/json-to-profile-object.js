@@ -2,7 +2,9 @@ module.exports = (user, issues) => {
   user = JSON.parse(user);
   const raw = JSON.parse(issues)
       .map(function (i) {
-        i.label = i.labels.name;
+        if (i.labels[0]) {
+          i.label = i.labels[0].name;
+        }
         i.repo = i.repository.name;
         if (i.assignee) {
           i.assignee = i.assignee.login;
