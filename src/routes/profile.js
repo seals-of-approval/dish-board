@@ -12,6 +12,16 @@ const getIssues = (accessToken, cb) => {
   }, cb);
 };
 
+const getUser = (accessToken, cb) => {
+  request.get({
+    url: 'https://api.github.com/user',
+    headers: {
+      'User-Agent': 'dish-board',
+      Authorization: `token ${accessToken}`
+    }
+  }, cb);
+};
+
 const profile = {
   method: 'GET',
   path: '/profile',
@@ -26,9 +36,12 @@ const profile = {
         if (err) {
           reply('Stop trying to get into our website with a dodgy token, you animal');
         } else {
-          getIssues(token.accessToken, (err, response, body) => {
+          getUser(token.accessToken, (err, response, user) => {
             if (err) reply(err);
-            reply.view('profile', jsonToProfileObject(body));
+            getIssues(token.accessToken, (err, response, body) => {
+              if (err) reply(err);
+              reply.view('profile', jsonToProfileObject(user, body));
+            });
           });
         }
       });

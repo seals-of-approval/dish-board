@@ -1,5 +1,6 @@
-module.exports = (json, organis) => {
-  const raw = JSON.parse(json)
+module.exports = (user, issues) => {
+  user = JSON.parse(user);
+  const raw = JSON.parse(issues)
       .map(function (i) {
         i.label = i.labels.name;
         if (i.assignee) {
@@ -8,8 +9,8 @@ module.exports = (json, organis) => {
         return i;
       });
   const profileObj = {};
-  profileObj.username = raw[0].user.login;
-  profileObj['user-url'] = raw[0].user.url;
+  profileObj.username = user.login;
+  profileObj['user-url'] = user.url;
   profileObj.organisation = raw[0].repository.owner.login;
   profileObj['open-issues'] = raw.filter(i => i.state === 'open');
   profileObj['closed-issues'] = raw.filter(i => i.state === 'closed');
