@@ -2,7 +2,8 @@ const querystring = require('querystring');
 
 const githubOauth = {
   client_id: process.env.CLIENT_ID,
-  redirect_uri: `${process.env.BASE_URL}/welcome`
+  redirect_uri: `${process.env.BASE_URL}/welcome`,
+  scope: 'user repo'
 };
 
 const login = {

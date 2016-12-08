@@ -1,22 +1,15 @@
-// const request = require('request');
+const request = require('request');
 const createJwt = require('../create-jwt');
 
-// const setOptions = (code) => {
-//   const options = {
-//     url: 'https://github.com/login/oauth/access_token',
-//     method: 'POST',
-//     headers: {
-//       accept: 'application/json'
-//     },
-//     form: {
-//       client_id: process.env.CLIENT_ID,
-//       client_secret: process.env.CLIENT_SECRET,
-//       redirect_uri: `${process.env.BASE_URL}/welcome`,
-//       code: code
-//     }
-//   };
-//   return options;
-// };
+const getIssues = (accessToken, cb) => {
+  request.get({
+    url: 'https://api.github.com/orgs/fac9/issues?filter=all',
+    headers: {
+      'User-Agent': 'dish-board',
+      Authorization: `token ${accessToken}`
+    }
+  }, cb);
+};
 
 const profile = {
   method: 'GET',
@@ -32,7 +25,11 @@ const profile = {
         if (err) {
           reply('Stop trying to get into our website with a dodgy token, you animal');
         } else {
-          reply('Welcome!');
+          getIssues(token.accessToken, (err, response, body) => {
+            if (err) reply(err);
+            let titles = JSON.parse(body).map(issueObj => issueObj.title);
+            reply(titles);
+          });
         }
       });
     }
