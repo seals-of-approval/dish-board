@@ -21,28 +21,22 @@ const setOptions = (code) => {
 const welcome = {
   method: 'GET',
   path: '/welcome',
-  config: {
-    auth: false,
-    handler: (req, reply) => {
-      const myOptions = setOptions(req.query.code);
-      request(myOptions, (err, res, body) => {
-        if (err) throw err;
-        const myToken = JSON.parse(body).access_token;
-        createJwt.updatePayload(myToken);
-        createJwt.encodeJWT(function (err, token) {
-          if (err) {
-            return console.error(err.name, err.message);
-          } else {
-            console.log(req.auth.credentials);
-            req.CookieAuth.set({auth: token});
-            console.log(token);
-            reply('worked!');
-          }
-        });
-        // console.log(`By the way, we've got the token: ${myToken}`);
+  handler: (req, reply) => {
+    const myOptions = setOptions(req.query.code);
+    request(myOptions, (err, res, body) => {
+      if (err) throw err;
+      const myToken = JSON.parse(body).access_token;
+      createJwt.updatePayload(myToken);
+      createJwt.encodeJWT(function (err, token) {
+        if (err) {
+          return console.error(err.name, err.message);
+        } else {
+          req.cookieAuth.set({auth: token});
+          reply('hello');
+          // reply.redirect('/profile');
+        }
       });
-      // reply.view('profile')
-    }
+    });
   }
 };
 
