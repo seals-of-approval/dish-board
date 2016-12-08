@@ -32,8 +32,7 @@ const welcome = {
           return console.error(err.name, err.message);
         } else {
           req.cookieAuth.set({auth: token});
-          reply('hello');
-          // reply.redirect('/profile');
+          reply.redirect('/profile');
         }
       });
     });

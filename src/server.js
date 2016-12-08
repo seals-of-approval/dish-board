@@ -19,7 +19,8 @@ const cookieOptions = {
   password: process.env.COOKIE_PASSWORD,
   cookie: 'JWT-cookie',
   isSecure: process.env.NODE_ENV === 'PRODUCTION',
-  ttl: 24 * 60 * 60 * 1000
+  ttl: 24 * 60 * 60 * 1000,
+  redirectTo: '/'
 };
 
 const server = new Hapi.Server();
