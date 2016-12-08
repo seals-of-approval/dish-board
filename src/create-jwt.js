@@ -18,7 +18,12 @@ const encodeJWT = function (callback) {
   jwt.encode(secret, payload, algorithm, callback);
 };
 
+const decodeJWT = function (token, callback) {
+  jwt.decode(secret, token, callback);
+};
+
 module.exports = {
   updatePayload,
-  encodeJWT
+  encodeJWT,
+  decodeJWT
 };
