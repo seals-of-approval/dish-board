@@ -28,8 +28,12 @@ const profile = {
     },
     handler: (req, reply) => {
       let jwt = req.auth.credentials.auth;
-      createJwt.decodeJWT(jwt, function (err, decoded) {
-        console.log(decoded);
+      createJwt.decodeJWT(jwt, function (err, token) {
+        if (err) {
+          reply('Stop trying to get into our website with a dodgy token, you animal');
+        } else {
+          reply('Welcome!');
+        }
       });
     }
   }
