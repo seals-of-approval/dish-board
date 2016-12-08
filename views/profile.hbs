@@ -1,0 +1,39 @@
+<header class="header">
+  <a href="{{user-url}}" class="header__user">{{username}}</a>
+  <a href="/logout" class="header__logout">Logout</a>
+  <h1 class="header__orgname">{{organisation}}</h1>
+</header>
+
+<table class="table">
+  <tr class="table__row table__row--column-title">
+    <th>Open</th>
+    <th><a href="#">Label</a></th>
+    <th><a href="#">Assignee</a></th>
+  </tr>
+  {{#each open-issues}}
+    <tr class="table__row">
+      <td>{{this.title}}</td>
+      <td>{{this.label}}</td>
+      <td>{{this.assignee}}</td>
+    </tr>
+  {{/each}}
+</table>
+
+<table class="table">
+  <tr class="table__row table__row--column-title">
+    <th>Closed</th>
+    <th><a href="#">Label</a></th>
+    <th><a href="#">Assignee</a></th>
+  </tr>
+  {{#each closed-issues}}
+    <tr class="table__row">
+      <td>{{this.title}}</td>
+      <td>{{this.label}}</td>
+      <td>{{this.assignee}}</td>
+    </tr>
+  {{/each}}
+</table>
+
+<footer class="footer">
+  <p class="footer__text">Created by <a class="footer__link" href="https://github.com/seals-of-approval/dish-board">The Seals of Approval</a></p>
+</footer>

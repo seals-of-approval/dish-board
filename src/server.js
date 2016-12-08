@@ -2,6 +2,7 @@ const Hapi = require('hapi');
 const env = require('env2')('./config.env');
 const routes = require('./routes.js');
 const Inert = require('inert');
+const Vision = require('vision');
 const CookieAuth = require('hapi-auth-cookie');
 
 const defaultRoute = {
@@ -28,7 +29,17 @@ server.connection({
   port: process.env.PORT || 8080
 });
 
-server.register([Inert, CookieAuth], (registerError) => {
+server.register([Inert, CookieAuth, Vision], (registerError) => {
+  server.views({
+    engines: {
+      hbs: require('handlebars')
+    },
+    relativeTo: __dirname,
+    path: '../views',
+    layoutPath: '../views/layout',
+    layout: 'default'
+  });
+
   if (registerError) throw registerError;
   server.auth.strategy('session', 'cookie', cookieOptions);
   server.route([defaultRoute, ...routes]);
