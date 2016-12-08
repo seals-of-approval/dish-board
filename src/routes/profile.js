@@ -1,5 +1,6 @@
 const request = require('request');
 const createJwt = require('../create-jwt');
+const jsonToProfileObject = require('../helpers/json-to-profile-object');
 
 const getIssues = (accessToken, cb) => {
   request.get({
@@ -27,8 +28,7 @@ const profile = {
         } else {
           getIssues(token.accessToken, (err, response, body) => {
             if (err) reply(err);
-            let titles = JSON.parse(body).map(issueObj => issueObj.title);
-            reply(titles);
+            reply.view('profile', jsonToProfileObject(body));
           });
         }
       });
