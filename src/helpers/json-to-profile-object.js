@@ -15,7 +15,7 @@ module.exports = (user, issues) => {
   profileObj.username = user.login;
   profileObj['user-url'] = user.url;
   profileObj.organisation = raw[0].repository.owner.login;
-  profileObj['open-issues'] = raw.filter(i => i.state === 'closed');
+  profileObj['open-issues'] = raw.filter(i => i.state === 'open');
   profileObj['closed-issues'] = raw.filter(i => i.state === 'closed');
   return profileObj;
 };
