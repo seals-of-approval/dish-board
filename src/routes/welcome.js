@@ -29,8 +29,7 @@ const welcome = {
     request(myOptions, (err, res, body) => {
       if (err) throw err;
       const myToken = JSON.parse(body).access_token;
-      createJwt.updatePayload(myToken);
-      createJwt.encodeJWT(function (err, token) {
+      createJwt.encodeJWT(myToken, function (err, token) {
         if (err) {
           return console.error(err.name, err.message);
         } else {
