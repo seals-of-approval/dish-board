@@ -11,7 +11,6 @@ const mapForProfile = (issues) => {
   });
   return issues;
 };
-
 module.exports = (user, closedissues, openissues) => {
   user = JSON.parse(user);
   openissues = mapForProfile(JSON.parse(openissues));
