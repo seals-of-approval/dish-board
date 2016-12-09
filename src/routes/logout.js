@@ -1,6 +1,6 @@
 module.exports = {
   path: '/logout',
-  method: 'GET',
+  method: 'get',
   config: {
     auth: 'session',
     handler: (req, reply) => {
