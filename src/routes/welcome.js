@@ -23,6 +23,9 @@ const welcome = {
   path: '/welcome',
   handler: (req, reply) => {
     const myOptions = setOptions(req.query.code);
+    if (!req.query.code) {
+      return reply().code(404);
+    }
     request(myOptions, (err, res, body) => {
       if (err) throw err;
       const myToken = JSON.parse(body).access_token;
