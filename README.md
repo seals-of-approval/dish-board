@@ -2,6 +2,15 @@
 
 A website for FAC members to see all the issues from the FAC organisation on github.
 
+# Setup
+- Clone our repo
+- Do ```npm install ``` followed by ```npm start```
+- Request our environment variables from us and put them into a config.env
+- Go to localhost:8080
+
+# Tests
+- To run our tests do ```npm test```
+
 ## Design Mockup
 
 ![Design Mockup](docs/mockup-dishboard.jpg)
