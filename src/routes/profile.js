@@ -1,22 +1,26 @@
-// const request = require('request');
+const request = require('request');
 const createJwt = require('../create-jwt');
+const jsonToProfileObject = require('../helpers/json-to-profile-object');
 
-// const setOptions = (code) => {
-//   const options = {
-//     url: 'https://github.com/login/oauth/access_token',
-//     method: 'POST',
-//     headers: {
-//       accept: 'application/json'
-//     },
-//     form: {
-//       client_id: process.env.CLIENT_ID,
-//       client_secret: process.env.CLIENT_SECRET,
-//       redirect_uri: `${process.env.BASE_URL}/welcome`,
-//       code: code
-//     }
-//   };
-//   return options;
-// };
+const getIssues = (accessToken, cb) => {
+  request.get({
+    url: 'https://api.github.com/orgs/fac9/issues?filter=all&state=all',
+    headers: {
+      'User-Agent': 'dish-board',
+      Authorization: `token ${accessToken}`
+    }
+  }, cb);
+};
+
+const getUser = (accessToken, cb) => {
+  request.get({
+    url: 'https://api.github.com/user',
+    headers: {
+      'User-Agent': 'dish-board',
+      Authorization: `token ${accessToken}`
+    }
+  }, cb);
+};
 
 const profile = {
   method: 'GET',
@@ -32,7 +36,13 @@ const profile = {
         if (err) {
           reply('Stop trying to get into our website with a dodgy token, you animal');
         } else {
-          reply('Welcome!');
+          getUser(token.accessToken, (err, response, user) => {
+            if (err) reply(err);
+            getIssues(token.accessToken, (err, response, body) => {
+              if (err) reply(err);
+              reply.view('profile', jsonToProfileObject(user, body));
+            });
+          });
         }
       });
     }
