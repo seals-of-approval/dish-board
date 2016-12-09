@@ -13,7 +13,7 @@ module.exports = (user, issues) => {
       });
   const profileObj = {};
   profileObj.username = user.login;
-  profileObj['user-url'] = user.url;
+  profileObj['user-url'] = user.html_url;
   profileObj.organisation = raw[0].repository.owner.login;
   profileObj['open-issues'] = raw.filter(i => i.state === 'open');
   profileObj['closed-issues'] = raw.filter(i => i.state === 'closed');
